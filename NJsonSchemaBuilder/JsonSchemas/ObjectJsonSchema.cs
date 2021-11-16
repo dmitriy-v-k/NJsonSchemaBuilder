@@ -6,18 +6,10 @@ using System.Text.Json;
 
 namespace NJsonSchemaBuilder.JsonSchemas
 {
-    public sealed class ObjectJsonSchema : IJsonSchema
+    public sealed class ObjectJsonSchema : AbstractJsonSchema
     {
-        public string AsJson()
+        protected override void WriteContent(Utf8JsonWriter jsonWriter)
         {
-            using var stream = new MemoryStream();
-            using var jsonWriter = new Utf8JsonWriter(stream);
-            jsonWriter.WriteStartObject();
-
-            jsonWriter.WriteEndObject();
-            jsonWriter.Flush();
-
-            return Encoding.UTF8.GetString(stream.ToArray());
         }
     }
 }
