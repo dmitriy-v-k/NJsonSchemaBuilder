@@ -1,7 +1,9 @@
-﻿namespace NJsonSchemaBuilder
+﻿using System.Text.Json;
+
+namespace NJsonSchemaBuilder
 {
     public interface IJsonDocument
     {
-        string AsJson();
+        string AsJsonString();
     }
 }

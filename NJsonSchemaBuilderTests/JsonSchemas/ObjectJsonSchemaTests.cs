@@ -15,12 +15,14 @@ namespace NJsonSchemaBuilder.JsonSchemas.Tests
         public void BeforeEach()
         {
             schema = new ObjectJsonSchema();
+            schema.Schema = new Uri("https://json-schema.org/draft/2020-12/schema");
         }
 
         [Test()]
         public void AsJsonTest()
         {
-            StringAssert.AreEqualIgnoringCase("{}", schema.AsJson());
+            var jsonSchema = schema.AsJsonString();
+            StringAssert.AreEqualIgnoringCase("{}", schema.AsJsonString());
         }
     }
 }
