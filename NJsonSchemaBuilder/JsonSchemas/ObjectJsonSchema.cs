@@ -6,28 +6,26 @@ using System.Text.Json.Serialization;
 
 namespace NJsonSchemaBuilder.JsonSchemas
 {
-    public sealed class ObjectJsonSchema : AbstractJsonSchema
+    public sealed class ObjectJsonSchema : AbstractJsonSchema<IObjectInstance<ObjectInstance>>, IObjectInstance<ObjectJsonSchema>
     {
+
         [JsonPropertyOrder(5)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public Dictionary<string, string> Properties { get; set; }
+        public IDictionary<string, object> Properties { get => typedInstance.Properties; }
 
         [JsonPropertyOrder(6)]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-        public List<string> Required { get; set; }
+        public IList<string> Required { get => typedInstance.Required; }
 
-        public ObjectJsonSchema():
-            base("object")
+        public ObjectJsonSchema() :
+            base(new ObjectInstance())
         {
-            Required = new List<string>
-            {
-                "test",
-            };
+        }
 
-            Properties = new Dictionary<string, string>
-            {
-                {"test", "test"},
-            };
+        public ObjectJsonSchema AddProperty(IObjectInstanceProperty objectInstanceProperty)
+        {
+            typedInstance.AddProperty(objectInstanceProperty);
+            return this;
         }
     }
 }

@@ -7,9 +7,10 @@ using System.Text.Json.Serialization;
 
 namespace NJsonSchemaBuilder.JsonSchemas
 {
-    public abstract class AbstractJsonSchema: IJsonDocument
+    public abstract class AbstractJsonSchema<T> : IJsonDocument
+        where T : class, IAnyInstance
     {
-        private readonly string type;
+        protected readonly T typedInstance;
 
         [JsonPropertyName("$schema")]
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
@@ -27,14 +28,17 @@ namespace NJsonSchemaBuilder.JsonSchemas
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyOrder(3)]
-        public string Description { get; set; }
+        public string Description
+        { 
+            get => typedInstance.Description;
+        }
 
         [JsonPropertyOrder(4)]
-        public string Type => type;
+        public string Type => typedInstance.Type;
 
-        protected AbstractJsonSchema(string type)
+        protected AbstractJsonSchema(T typedInstance)
         {
-            this.type = type;
+            this.typedInstance = typedInstance;
         }
 
         public string AsJsonString()

@@ -16,6 +16,7 @@ namespace NJsonSchemaBuilder.JsonSchemas.Tests
         {
             schema = new ObjectJsonSchema();
             schema.Schema = new Uri("https://json-schema.org/draft/2020-12/schema");
+            schema.AddProperty(new ObjectInstanceProperty("n1", true, new StringInstance { Description = "d1" }));
         }
 
         [Test()]
