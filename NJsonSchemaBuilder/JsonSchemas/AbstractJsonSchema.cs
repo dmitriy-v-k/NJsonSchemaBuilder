@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NJsonSchemaBuilder.Converters;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -7,8 +8,9 @@ using System.Text.Json.Serialization;
 
 namespace NJsonSchemaBuilder.JsonSchemas
 {
-    public abstract class AbstractJsonSchema<T> : IJsonDocument
-        where T : class, IAnyInstance
+    public abstract class AbstractJsonSchema<T, IT> : IJsonDocument
+        where T : IAnyInstance<IT>
+        where IT : IInstanceType
     {
         protected readonly T typedInstance;
 
@@ -34,7 +36,7 @@ namespace NJsonSchemaBuilder.JsonSchemas
         }
 
         [JsonPropertyOrder(4)]
-        public string Type => typedInstance.Type;
+        public IT Type => typedInstance.Type;
 
         protected AbstractJsonSchema(T typedInstance)
         {
@@ -43,11 +45,14 @@ namespace NJsonSchemaBuilder.JsonSchemas
 
         public string AsJsonString()
         {
-            return JsonSerializer.Serialize<object>(this, new JsonSerializerOptions
+            var options = new JsonSerializerOptions
             {
                 WriteIndented = true,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-            });
+            };
+            var basicInstanceTypeConverter = new BasicInstanceTypeConverter(options);
+            options.Converters.Add(basicInstanceTypeConverter);
+            return JsonSerializer.Serialize<object>(this, options);
         }
     }
 }

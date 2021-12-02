@@ -2,7 +2,7 @@
 
 namespace NJsonSchemaBuilder.JsonSchemas
 {
-    public interface IStringInstance: IAnyInstance
+    public interface IStringInstance: IAnyInstance<BasicInstanceType>
     {
     }
 }

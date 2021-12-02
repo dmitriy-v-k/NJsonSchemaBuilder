@@ -23,7 +23,7 @@ namespace NJsonSchemaBuilder.JsonSchemas.Tests
         public void AsJsonTest()
         {
             var jsonSchema = schema.AsJsonString();
-            StringAssert.AreEqualIgnoringCase("{}", schema.AsJsonString());
+            StringAssert.AreEqualIgnoringCase("{\r\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\r\n  \"type\": \"object\",\r\n  \"properties\": {\r\n    \"n1\": {\r\n      \"type\": \"string\",\r\n      \"description\": \"d1\"\r\n    }\r\n  },\r\n  \"required\": [\r\n    \"n1\"\r\n  ]\r\n}", schema.AsJsonString());
         }
     }
 }

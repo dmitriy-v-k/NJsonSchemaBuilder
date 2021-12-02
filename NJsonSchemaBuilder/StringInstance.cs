@@ -4,7 +4,7 @@ namespace NJsonSchemaBuilder.JsonSchemas
 {
     public class StringInstance : IStringInstance
     {
-        public string Type => "string";
+        public BasicInstanceType Type => new BasicInstanceType("string");
 
         public string Description { get; set; }
     }

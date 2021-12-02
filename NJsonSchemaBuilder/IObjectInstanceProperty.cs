@@ -4,6 +4,6 @@
     {
         public string Name { get; }
         public bool IsRequired { get; }
-        public IAnyInstance Object { get; }
+        public IAnyInstance<IInstanceType> Object { get; }
     }
 }

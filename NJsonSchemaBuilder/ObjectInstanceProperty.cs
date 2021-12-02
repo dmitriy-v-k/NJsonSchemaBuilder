@@ -4,9 +4,9 @@
     {
         public string Name { get; private set; }
         public bool IsRequired { get; private set; }
-        public IAnyInstance Object { get; private set; }
+        public IAnyInstance<IInstanceType> Object { get; private set; }
 
-        public ObjectInstanceProperty(string name, bool isRequired, IAnyInstance @object)
+        public ObjectInstanceProperty(string name, bool isRequired, IAnyInstance<IInstanceType> @object)
         {
             Name = name;
             IsRequired = isRequired;

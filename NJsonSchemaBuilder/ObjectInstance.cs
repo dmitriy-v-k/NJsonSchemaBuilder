@@ -4,7 +4,7 @@ namespace NJsonSchemaBuilder.JsonSchemas
 {
     public class ObjectInstance : IObjectInstance<ObjectInstance>
     {
-        public string Type => "object";
+        public BasicInstanceType Type => new BasicInstanceType("object");
 
         public string Description { get; private set; }
 

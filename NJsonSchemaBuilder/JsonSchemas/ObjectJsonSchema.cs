@@ -6,7 +6,9 @@ using System.Text.Json.Serialization;
 
 namespace NJsonSchemaBuilder.JsonSchemas
 {
-    public sealed class ObjectJsonSchema : AbstractJsonSchema<IObjectInstance<ObjectInstance>>, IObjectInstance<ObjectJsonSchema>
+    public sealed class ObjectJsonSchema :
+        AbstractJsonSchema<IObjectInstance<ObjectInstance>, BasicInstanceType>,
+        IObjectInstance<ObjectJsonSchema>
     {
 
         [JsonPropertyOrder(5)]

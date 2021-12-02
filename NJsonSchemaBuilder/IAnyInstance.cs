@@ -1,8 +1,9 @@
 ﻿namespace NJsonSchemaBuilder.JsonSchemas
 {
-    public interface IAnyInstance
+    public interface IAnyInstance<out IT>
+        where IT : IInstanceType
     {
-        string Type { get; }
+        IT Type { get; }
 
         string Description { get; }
     }

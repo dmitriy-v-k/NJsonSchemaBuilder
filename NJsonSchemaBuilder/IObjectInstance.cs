@@ -2,7 +2,7 @@
 
 namespace NJsonSchemaBuilder.JsonSchemas
 {
-    public interface IObjectInstance<out T>: IAnyInstance
+    public interface IObjectInstance<out T>: IAnyInstance<BasicInstanceType>
         where T : IObjectInstance<T>
     {
         IDictionary<string, object> Properties { get; }
