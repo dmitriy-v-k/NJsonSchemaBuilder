@@ -3,6 +3,8 @@ using NJsonSchemaBuilder.JsonSchemas;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
+using System.IO;
 
 namespace NJsonSchemaBuilder.JsonSchemas.Tests
 {
@@ -22,8 +24,12 @@ namespace NJsonSchemaBuilder.JsonSchemas.Tests
         [Test()]
         public void AsJsonTest()
         {
-            var jsonSchema = schema.AsJsonString();
-            StringAssert.AreEqualIgnoringCase("{\r\n  \"$schema\": \"https://json-schema.org/draft/2020-12/schema\",\r\n  \"type\": \"object\",\r\n  \"properties\": {\r\n    \"n1\": {\r\n      \"type\": \"string\",\r\n      \"description\": \"d1\"\r\n    }\r\n  },\r\n  \"required\": [\r\n    \"n1\"\r\n  ]\r\n}", schema.AsJsonString());
+            var expected = JsonSerializer.Serialize(
+                JsonSerializer.Deserialize<object>(
+                    File.ReadAllText("./TestData/schema.json")));
+
+            var actual = schema.AsJsonString();
+            StringAssert.AreEqualIgnoringCase(expected, actual);
         }
     }
 }

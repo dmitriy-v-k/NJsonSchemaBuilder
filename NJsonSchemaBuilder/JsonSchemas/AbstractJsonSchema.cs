@@ -47,7 +47,7 @@ namespace NJsonSchemaBuilder.JsonSchemas
         {
             var options = new JsonSerializerOptions
             {
-                WriteIndented = true,
+                WriteIndented = false,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
             var basicInstanceTypeConverter = new BasicInstanceTypeConverter(options);
